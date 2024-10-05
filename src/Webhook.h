@@ -10,6 +10,7 @@
 #pragma once
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include <LogBroadcaster.h>
 #include <map>
 
 /// @brief Defines a generic webhook class for inheriting

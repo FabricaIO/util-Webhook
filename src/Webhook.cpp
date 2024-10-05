@@ -31,8 +31,8 @@ String Webhook::getRequest(String parameters) {
 	DeserializationError error = deserializeJson(doc, parameters);
 	// Test if parsing succeeds.
 	if (error) {
-		Serial.print(F("Deserialization failed: "));
-		Serial.println(error.f_str());
+		Logger.print(F("Deserialization failed: "));
+		Logger.println(error.f_str());
 		return "{\"code\": 400, \"response\": \"Bad JSON data\"}";
 	}
 	// Build parameter map
@@ -73,11 +73,11 @@ String Webhook::sendGetRequest(String url_params) {
 	String result = "{\"code\": " + String(response_code) + ",\"response\": \"";
 	if (response_code == HTTP_CODE_OK || response_code == HTTP_CODE_ACCEPTED) {
 		String response = client.getString();
-		Serial.println(response);
+		Logger.println(response);
 		result += response + "\"}";
 	} else {
-		Serial.print("Webhook failed. Response code: ");
-		Serial.println(response_code);
+		Logger.print("Webhook failed. Response code: ");
+		Logger.println(response_code);
 		result += "fail\"}";
 	}
 	client.end();
@@ -109,11 +109,11 @@ String Webhook::sendPostRequest(std::map<String, String> parameters, contentType
 	String result = "{\"code\": " + String(response_code) + ",\"response\": \"";
 	if (response_code == HTTP_CODE_OK || response_code == HTTP_CODE_ACCEPTED) {
 		String response = client.getString();
-		Serial.println(response);
+		Logger.println(response);
 		result += response + "\"}";
 	} else {
-		Serial.print("Webhook failed. Response code: ");
-		Serial.println(response_code);
+		Logger.print("Webhook failed. Response code: ");
+		Logger.println(response_code);
 		result += "fail\"}";
 	}
 	client.end();
