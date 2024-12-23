@@ -2,7 +2,7 @@
 
 /// @brief Creates a new Webhook
 /// @param URL The URL endpoint of the webhook
-/// @param URcustomHeadersL Optional custom headers as name and value pairs
+/// @param customHeaders Optional custom headers as name and value pairs
 Webhook::Webhook(String URL, std::map<String, String> customHeaders) {
 	webhook_config.url = URL;
 	webhook_config.custom_headers = customHeaders;
