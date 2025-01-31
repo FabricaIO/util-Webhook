@@ -73,6 +73,7 @@ String Webhook::sendGetRequest(String url_params) {
 	String result = "{\"code\": " + String(response_code) + ",\"response\": \"";
 	if (response_code == HTTP_CODE_OK || response_code == HTTP_CODE_ACCEPTED) {
 		String response = client.getString();
+		response.replace("\"", "\\\"");
 		Logger.println(response);
 		result += response + "\"}";
 	} else {
@@ -109,6 +110,7 @@ String Webhook::sendPostRequest(std::map<String, String> parameters, contentType
 	String result = "{\"code\": " + String(response_code) + ",\"response\": \"";
 	if (response_code == HTTP_CODE_OK || response_code == HTTP_CODE_ACCEPTED) {
 		String response = client.getString();
+		response.replace("\"", "\\\"");
 		Logger.println(response);
 		result += response + "\"}";
 	} else {
