@@ -1,0 +1,25 @@
+{
+	"name": "Fabrica-IO Utility Webhooks",
+	"version": "0.5.0",
+	"description": "Provides access to webhooks",
+	"keywords": "Fabrica-IO, utility, webhook",
+	"repository":
+	{
+	  "type": "git",
+	  "url": "https://github.com/FabricaIO/util-Webhook.git"
+	},
+	"authors":
+	[
+	  {
+		"name": "Sam Groveman",
+		"email": "SamGroveman@outlook.com",
+		"url": "https://github.com/FabricaIO"
+	  }
+	],
+	"dependencies": {
+	  },
+	"license": "GPLv3",
+	"homepage": "https://github.com/FabricaIO",
+	"frameworks": "arduino",
+	"platforms": "*"
+  }
