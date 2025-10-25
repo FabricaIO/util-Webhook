@@ -31,6 +31,8 @@ class Webhook {
 		String getRequest(std::map<String, String> parameters);
 		String postRequest(std::map<String, String> parameters);
 		String postRequest(String parameters);
+		String putRequest(std::map<String, String> parameters);
+		String putRequest(String parameters);
 	
 	private:
 		/// @brief HTTPClient object
@@ -40,6 +42,6 @@ class Webhook {
 		enum contentType { JSON, urlencoded };
 
 		String sendGetRequest(String url_params);
-		String sendPostRequest(std::map<String, String> parameters, contentType format);
+		String sendPostRequest(std::map<String, String> parameters, contentType format, bool put = false);
 		String parseParameters(std::map<String, String> parameters);
 };

@@ -57,6 +57,20 @@ String Webhook::postRequest(String parameters) {
 	return sendPostRequest(std::map<String, String>{{"params", parameters}}, contentType::JSON);
 }
 
+/// @brief Sends a PUT request with parameters in the format of a URL encoded string
+/// @param parameters A map of the names and values of the parameters
+/// @return A JSON string with "code" as the response code and "response" as the response payload
+String Webhook::putRequest(std::map<String, String> parameters) {
+	return sendPostRequest(parameters, contentType::urlencoded, true);
+}
+
+/// @brief Sends a PUT request with parameters in the format of a JSON encoded string
+/// @param parameters The JSON string to send
+/// @return A JSON string with "code" as the response code and "response" as the response payload 
+String Webhook::putRequest(String parameters) {
+	return sendPostRequest(std::map<String, String>{{"params", parameters}}, contentType::JSON, true);
+}
+
 /// @brief Sends a GET request
 /// @param url_params String representing the URL encoded GET parameters, if any
 /// @return A JSON string with "code" as the response code and "response" as the response payload
@@ -87,8 +101,9 @@ String Webhook::sendGetRequest(String url_params) {
 /// @brief Sends a POST request
 /// @param parameters The POST parameters
 /// @param format The format of the POST parameters
+/// @param put Send as a PUT request instead
 /// @return A JSON string with "code" as the response code and "response" as the response payload 
-String Webhook::sendPostRequest(std::map<String, String> parameters, contentType format) {
+String Webhook::sendPostRequest(std::map<String, String> parameters, contentType format, bool put) {
 	client.begin(webhook_config.url);
 	String params;
 	// Add any custom headers
@@ -105,7 +120,13 @@ String Webhook::sendPostRequest(std::map<String, String> parameters, contentType
 		client.addHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
 	// Get response
-	int response_code = client.POST(params);
+	int response_code;
+	if (put) {
+		response_code = client.PUT(params);
+	}
+	else {
+		response_code = client.POST(params);
+	}
 	String result = "{\"code\": " + String(response_code) + ",\"response\": \"";
 	if (response_code == HTTP_CODE_OK || response_code == HTTP_CODE_ACCEPTED) {
 		String response = client.getString();
